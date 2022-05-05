@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Checks sets file based on path or file passed
+# Otherwise uses current working directory
+if [ $1 -z ]
+then
+    FILE=$(pwd)
+else
+    FILE=$1
+fi
+
+# Syncs the folder to the pi home directory.
+# Only updates changed files
+if [ -e $1 ]
+then
+    echo "Syncing $FILE to pi..."
+    rsync -rP --update $FILE pi@raspberrypi.local:/home/pi/
+else
+    echo 'File or path not found'
+fi

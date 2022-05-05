@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# I changed permissions of the brightness file
+# so sudo command was not necessary. This was a service i created
+# in systemd and enabled
+
+currentbrightness=$(cat /sys/class/backlight/intel_backlight/brightness) || exit
+
+case $1 in
+    "inc") echo $(($currentbrightness + $2))| tee /sys/class/backlight/intel_backlight/brightness;;
+    "dec") echo $(($currentbrightness  - $2)) | tee /sys/class/backlight/intel_backlight/brightness;;
+esac

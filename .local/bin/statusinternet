@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# This script will grab the SSID Name and estimate the signal strength
+
+# Get SSID
+SSID=$(iwgetid -r)
+
+INTERFACE=wlp3s0
+
+# Get Signal Strength, i.e. 70/70. Both fields need to be grabbed
+# in order to determine the signal and which graphic to execute.
+
+STR=$(iwconfig $INTERFACE | grep -i quality | awk '{print $2}' | \
+      cut -d'=' -f2 | cut -d'/' -f1)
+
+# TOTAL=$(iwconfig wlp3s0 | grep -i quality | awk '{print $2}' | \
+#      cut -d'=' -f2 | cut -d'/' -f2)
+
+if [ $STR -ge 50 ]
+then
+    ICON=""
+elif [ $STR -ge 30 ] && [ $STR -lt 50 ]
+then
+    ICON=""
+elif [ $STR -ge 10 ] && [ $STR -lt 30 ]
+then
+    ICON=""
+else
+    ICON=""
+fi
+
+
+echo $ICON$SSID 
+
+

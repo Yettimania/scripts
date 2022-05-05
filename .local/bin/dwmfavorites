@@ -1,0 +1,10 @@
+#!/bin/bash
+
+file="$HOME/.favorites"
+
+height=$(wc -l "$file" | awk '{print $1}')
+
+cmd=$( dmenu -l "$height" -c -fn 'Tamsyn:pixelsize=16' -nb '#171717' \
+       -nf '#b2a191' -sb '#bf7a29' < "$file" )
+
+exec $cmd

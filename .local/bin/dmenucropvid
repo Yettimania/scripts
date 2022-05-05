@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# This program will crop a video to the size of the external screen at home
+
+WIDTH=1920
+HEIGHT=1080
+XPOS=1366
+YPOS=0
+
+notify-send "Beginning to crop video $1."
+
+ffmpeg -i $1 -filter:v "crop=$WIDTH:$HEIGHT:$XPOS:$YPOS" cropped.mp4
+
+notify-send "Video complete."

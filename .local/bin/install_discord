@@ -1,0 +1,21 @@
+#!/bin/sh
+
+echo "Installing discord ${1}"
+
+echo "Removing old config..." 
+
+rm -R ~/.config/discord
+
+echo "Unpacking ${1}..."
+
+sudo tar xvzf $1 -C /usr/share
+sudo chmod 777 -R /usr/share/Discord
+
+sudo rm -r /usr/share/discord
+sudo mv /usr/share/Discord /usr/share/discord
+
+echo "Linking to ~/.local/bin"
+sudo rm ~/.local/bin/discord
+ln -s /usr/share/discord/Discord /home/ksnyder/.local/bin/discord
+
+echo "discord install complete!"

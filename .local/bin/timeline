@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# Add or view an entry in the timeline.
+
+# Select an existing entry to view it from the file, or type a new entry to add it.
+#
+
+file="$HOME/.timeline"
+touch "$file"
+prompt=$(date +"%m-%d-%y %R")
+
+cmd=$(dmenu -l 15 -fn 'Tamzen-15:pixelsize=16' -nb '#171717' -nf '#b2a191' -sb '#627a92' -p "$prompt" "$@")
+
+[ "$cmd" != "" ] || exit
+
+echo -e "$prompt $cmd\n$(cat $file)" > "$file"
+
+exit 0

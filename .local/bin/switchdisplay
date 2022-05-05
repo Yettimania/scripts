@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# This will toggle between the laptop as the primary screen and an
+# external display that may be connected. 
+
+IFS=$'\n'
+# Get monitor names
+MONITORS=( $(xrandr | grep -w "connected" | cut -d" " -f1) )
+unset IFS
+
+# Get count of connected monitors
+COUNT=$( xrandr | grep -w "connected" | wc -l )
+
+if [ $COUNT -gt 1 ] 
+then
+    echo -e "\ue135"
+    xrandr --output ${MONITORS[0]} --auto --output ${MONITORS[1]} --auto --right-of ${MONITORS[0]}
+else 
+    echo -e "\ue130"
+    xrandr --auto
+fi
+
+if [ $# -gt 0 ]
+then
+    killall sxhkd polybar feh compoton xss-lock
+    bspc wm -r
+fi

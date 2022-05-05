@@ -1,0 +1,20 @@
+#!/bin/bash
+# This is a polybar toggle to turn off the track pad
+# Useful when programming and brush the trakcpad.
+
+
+# Run 'xinput list' to determine device ID
+DEVICE_ID=12
+
+STATUS=$( xinput list-props 12 | grep 'Device Enabled' | cut -d':' -f2)
+
+if [ $STATUS = 1 ]
+then
+    xinput --disable $DEVICE_ID 
+    notify-send 'Trackpad disabled'
+    echo ''
+else
+    xinput --enable $DEVICE_ID 
+    notify-send 'Trackpad enabled'
+    echo ''
+fi

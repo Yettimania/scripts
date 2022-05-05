@@ -1,0 +1,26 @@
+# My start up script for dwm
+#! /bin/bash
+
+#pgrep -f dwmstart | xargs kill
+
+PREV=$( cat /tmp/dwmstartpid )
+kill -15 $PREV
+
+
+tresorit-cli start &
+xss-lock -- slock &
+compton &
+
+xset +fp /home/ksnyder/.fonts
+xset fp rehash
+
+#while true; do
+#    xsetroot -name "$(dwmstatus)"
+#    sleep 5
+#done &
+
+slstatus &
+
+echo $! > /tmp/dwmstartpid
+
+exec dwm

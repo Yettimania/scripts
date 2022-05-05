@@ -1,0 +1,15 @@
+#!/bin/bash
+#  sijidots
+
+DELIM='|'
+
+WLAN=$(statusinternet)
+CPU=$(echo " `LC_ALL=C top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1}'`%")
+MEM=$(statusmemory)
+BAT=$(battery)
+DATE=$(date +"%m-%d %H:%M")
+TRES=$(dwmtresor)
+# DROP=$(dwmdropbox)
+
+
+echo " $TRES^c#98971a^$DELIM^d^ $MEM^c#98971a^ $DELIM ^d^$WLAN^c#98971a^ $DELIM ^d^$BAT^c#98971a^ $DELIM ^d^$DATE"

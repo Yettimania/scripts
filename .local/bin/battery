@@ -5,41 +5,22 @@ BAT0=$(cat /sys/class/power_supply/BAT0/capacity)
 BAT1=$(cat /sys/class/power_supply/BAT1/capacity)
 
 STATUS=$(cat /sys/class/power_supply/BAT0/status)
+BAT=$(((($BAT0+$BAT1)/2)))
 
 if [ $STATUS == Charging ]
 then
-   ICON=$( echo -e "\ue20e" )
-else
-    ICON=""
-fi
-
-# BAT0 is internal
-# BAT1 is external
-BAT=$(((($BAT0+$BAT1)/2)))
-# BAT=$((BAT0))
-
-# Full and short texts
-#echo "$BAT%"  
-
-if [ $BAT -gt 75 ]
+    echo -e  $BAT%
+elif [ $BAT -gt 75 ]
 then
-    echo -e  $ICON"\ue214$BAT%"
+    echo -e  $BAT%
 elif [ $BAT -gt 30 ] && [ $BAT -lt 76 ]
 then
-    echo -e $ICON"\ue213$BAT%"
+    echo -e  $BAT%
 elif [ $BAT -gt 10 ] && [ $BAT -lt 31 ]
 then
-    echo -e $ICON"\ue212$BAT%"
+    echo -e  $BAT%
 else
-    echo -e $ICON"\ue211$BAT%"
+    echo -e  $BAT%
 fi
 
-#Notify if getting low
-#if [ $BAT -le 10 ]; then
-    #notify-send "Low Battery ${BAT}%" -u Normal 
-#elif [ $BAT -le 5 ]; then
-    #notify-send "Critical Battery ${BAT}%" -u Critical
-#fi
-
 exit 
-

@@ -6,7 +6,7 @@
 # Must have xclip installed to even show menu.
 xclip -h >/dev/null || exit
 
-chosen=$(grep -v "#" ~/.local/share/julia_uni | dmenu -i -h 5 -l 20 -fn Cabin-14 -nb '#171717' -nf '#b2a191' -sb '#bf7a29')
+chosen=$(grep -v "#" ~/.local/share/julia_uni | dmenu -i -h 5 -l 20 -nb '#171717' -nf '#b2a191' -sb '#bf7a29')
 
 [ "$chosen" != "" ] || exit
 

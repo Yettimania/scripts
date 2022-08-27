@@ -9,8 +9,9 @@ COLORDOWN=ff0000
 
 if [ $STATUS = 'running' ]
 then
-    echo -e "^c#$COLORUP^^d^"
+    # echo -e "^c#$COLORUP^^d^"
+    echo -e 
 else
-    echo -e "^c#$COLORDOWN^^d^"
+    # echo -e "^c#$COLORDOWN^^d^"
+    echo -e 
 fi
-

@@ -19,31 +19,35 @@ MAINSIZE='1366x768'
 dualmonitor() { \
 #    xrandr --output ${MONITORS[1]} --auto --right-of ${MONITORS[0]}
     xrandr --output ${MONITORS[2]} --mode 3840x2160 --scale 0.7x0.7 --left-of ${MONITORS[1]}
+    feh --bg-scale ~/Pictures/Backgrounds/gruvbox_linux.png
 }
 
 portmonitor() { \
     xrandr --output ${MONITORS[2]} --mode 1920x1080 --scale 0.7x0.7 --left-of ${MONITORS[1]}
+    feh --bg-scale ~/Pictures/Backgrounds/gruvbox_linux.png
 }
 
 laptop() { \
     xrandr --output ${MONITORS[2]} --off
     xrandr --output ${MONITORS[1]} --auto
+    feh --bg-scale ~/Pictures/Backgrounds/gruvbox_linux.png
 }
 
 clamshell() { \
     xrandr --output ${MONITORS[2]} --mode 3840x2160 --scale 0.7x0.7 --output ${MONITORS[1]} --off
+    feh --bg-scale ~/Pictures/Backgrounds/gruvbox_linux.png
 }
 
 auto() { \
     xrandr --auto
 }
 
-choice=$(printf "DualMonitor\\nPortableMonitor\\nLaptop\\nClamshell\\nAuto" | rofi -dmenu -p "Select display:")
+choice=$(printf "dualmonitor\\nportablemonitor\\nlaptop\\nclamshell\\nauto" | rofi -dmenu -p "Select display:")
 
 case "$choice" in
-    DualMonitor) dualmonitor && notify-send "Dual Monitor";;
-    PortableMonitor) portmonitor && notify-send "Ext Monitor";;
-    Laptop) laptop && notify-send "Laptop";;
-    Clamshell) clamshell && notify-send "ClamShell";;
-    Auto) auto && notify-send "Auto";;
+    dualmonitor) dualmonitor && notify-send "Dual Monitor";;
+    portablemonitor) portmonitor && notify-send "Ext Monitor";;
+    laptop) laptop && notify-send "Laptop";;
+    clamshell) clamshell && notify-send "ClamShell";;
+    auto) auto && notify-send "Auto";;
 esac

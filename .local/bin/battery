@@ -7,20 +7,22 @@ BAT1=$(cat /sys/class/power_supply/BAT1/capacity)
 STATUS=$(cat /sys/class/power_supply/BAT0/status)
 BAT=$(((($BAT0+$BAT1)/2)))
 
-if [ $STATUS == Charging ]
-then
-    echo -e  $BAT%
-elif [ $BAT -gt 75 ]
-then
-    echo -e  $BAT%
-elif [ $BAT -gt 30 ] && [ $BAT -lt 76 ]
-then
-    echo -e  $BAT%
-elif [ $BAT -gt 10 ] && [ $BAT -lt 31 ]
-then
-    echo -e  $BAT%
-else
-    echo -e  $BAT%
-fi
+echo $BAT
+
+# if [ $STATUS == Charging ]
+# then
+    # echo -e  $BAT%
+# elif [ $BAT -gt 75 ]
+# then
+    # echo -e  $BAT%
+# elif [ $BAT -gt 30 ] && [ $BAT -lt 76 ]
+# then
+    # echo -e  $BAT%
+# elif [ $BAT -gt 10 ] && [ $BAT -lt 31 ]
+# then
+    # echo -e  $BAT%
+# else
+    # echo -e  $BAT%
+# fi
 
 exit 

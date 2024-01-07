@@ -1,26 +1,21 @@
 # My start up script for dwm
 #! /bin/bash
 
-#pgrep -f dwmstart | xargs kill
-
-PREV=$( cat /tmp/dwmstartpid )
-kill -15 $PREV
-
-
 tresorit-cli start &
-xss-lock -- slock &
-compton &
 
-xset +fp /home/ksnyder/.fonts
+xset +fp /home/ksnyder/.local/share/fonts
 xset fp rehash
 
-#while true; do
-#    xsetroot -name "$(dwmstatus)"
-#    sleep 5
-#done &
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+
+feh --bg-scale ~/Pictures/Backgrounds/rick.png
+
+mkdir /run/user/$(id -u)
+chmod 700 /run/user/$(id -u)
+
+XDG_RUNTIME_DIR=/run/user/$(id -u)
+
+pipewire &
 
 slstatus &
-
-echo $! > /tmp/dwmstartpid
-
 exec dwm
